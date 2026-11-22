@@ -3,10 +3,15 @@
 All notable changes to devfmt are recorded here. The format is based on
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
-There are no tagged releases yet, so changes are grouped by date under
-Unreleased. Routine flake input updates are left out.
+Versions are CalVer, `YY.MINOR.PATCH`: the major number is the two-digit year.
+Routine flake input updates are left out.
 
 ## Unreleased
+
+## [26.0.0] - 2026-11-22
+
+The first tagged release. Pin it with `github:red-oxide/devfmt/v26.0.0`. Changes
+before it are listed by date.
 
 ### 2026-11-22
 
@@ -28,6 +33,8 @@ Unreleased. Routine flake input updates are left out.
 
 #### Changed
 
+- The flake description is "One treefmt setup for all my repos" instead of "My
+  flake setup".
 - import-tree is updated from v0.2.0 to v0.3.0. `lib.importTree dir` now returns
   the module function itself rather than `{ imports = [ … ]; }`; both work in
   `imports`.
@@ -93,3 +100,5 @@ Unreleased. Routine flake input updates are left out.
 - Initial release: a flake-parts module on treefmt-nix with formatters and
   linters for each language, a fatal `on-unmatched` rule, deno for web formats,
   `LICENSE-*` and other common excludes, and re-exported inputs.
+
+[26.0.0]: https://github.com/red-oxide/devfmt/releases/tag/v26.0.0
