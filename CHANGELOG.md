@@ -20,6 +20,12 @@ Unreleased. Routine flake input updates are left out.
 - A weekly workflow opens an issue when an input pinned to a release tag
   (import-tree, nixfmt-rs) has a newer release, and `just outdated` lists them.
 
+#### Fixed
+
+- golangci-lint gets Go on its PATH. Without it, Go files failed
+  `nix flake check` (and `nix fmt` where Go isn't installed) with "go command
+  required, not found". Found by the new fixture tests.
+
 #### Changed
 
 - import-tree is updated from v0.2.0 to v0.3.0. `lib.importTree dir` now returns
