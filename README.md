@@ -30,6 +30,9 @@ Add devfmt as an input and build the flake with `devfmt.lib.mkFlake`:
 }
 ```
 
+`github:red-oxide/devfmt` follows master. To pin a release, use its tag, such as
+`github:red-oxide/devfmt/v26.0.0`; see the [changelog](CHANGELOG.md).
+
 Then:
 
 ```sh

@@ -1,5 +1,5 @@
 {
-  description = "My flake setup";
+  description = "One treefmt setup for all my repos";
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     systems.url = "github:nix-systems/default";
