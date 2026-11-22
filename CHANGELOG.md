@@ -8,6 +8,12 @@ Routine flake input updates are left out.
 
 ## Unreleased
 
+#### Fixed
+
+- latexindent no longer leaves `indent.log` (or `.bak` backups) in the repo; it
+  writes them to a temporary directory. The `fixtures` check now also fails if a
+  formatter leaves any file behind.
+
 ## [26.0.0] - 2026-11-22
 
 The first tagged release. Pin it with `github:red-oxide/devfmt/v26.0.0`. Changes

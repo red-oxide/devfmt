@@ -24,9 +24,32 @@ _: {
     {
       checks = {
         # One sample per supported language, already formatted: every formatter
-        # and linter has to run and leave them unchanged. A nixpkgs bump that
-        # breaks or changes one formatter fails here, before downstream repos.
-        fixtures = config.treefmt.build.check ./fixtures;
+        # and linter has to run and leave them unchanged, and leave no files
+        # behind (logs, backups). A nixpkgs bump that breaks or changes one
+        # formatter fails here, before downstream repos.
+        fixtures =
+          pkgs.runCommandLocal "treefmt-fixtures"
+            {
+              nativeBuildInputs = [
+                pkgs.gitMinimal
+                config.treefmt.build.wrapper
+              ];
+            }
+            ''
+              ${setup}
+              git init --quiet
+              git add .
+              git commit --quiet -m init
+              treefmt --no-cache
+              status=$(git status --porcelain --untracked-files=all)
+              if [ -n "$status" ]; then
+                echo "$status"
+                git --no-pager diff
+                echo "treefmt changed the fixtures or left files behind" >&2
+                exit 1
+              fi
+              touch $out
+            '';
 
         # A file no formatter handles has to fail (`on-unmatched = "fatal"`).
         fixtures-unmatched =
