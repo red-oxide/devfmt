@@ -30,3 +30,7 @@ update-input input:
 
 # Check formatting and the flake
 verify: fmt-check check
+
+# List inputs pinned to a release tag that have a newer release
+outdated:
+    ./scripts/pinned-inputs.sh

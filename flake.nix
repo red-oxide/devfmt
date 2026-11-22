@@ -11,7 +11,7 @@
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
-    import-tree.url = "github:denful/import-tree/v0.2.0";
+    import-tree.url = "github:denful/import-tree/v0.3.0";
     nixfmt-rs = {
       url = "github:Mic92/nixfmt-rs/0.5.3";
       # Build nixfmt-rs with our nixpkgs instead of locking its own copy
@@ -63,7 +63,10 @@
     devfmtInputs.flake-parts.lib.mkFlake { inputs = devfmtInputs; } {
       systems = import devfmtInputs.systems;
 
-      imports = [ sharedModule ];
+      imports = [
+        sharedModule
+        ./tests/fixtures.nix
+      ];
 
       flake = {
         flakeModules.default = sharedModule;
