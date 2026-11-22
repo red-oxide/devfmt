@@ -8,6 +8,24 @@ Unreleased. Routine flake input updates are left out.
 
 ## Unreleased
 
+### 2026-11-22
+
+#### Added
+
+- CI: `nix flake check` runs on pushes to master and on pull requests.
+- Fixture tests: `tests/fixtures` holds one formatted sample per supported
+  language, and the `fixtures` check fails if treefmt changes any of them. A
+  second check, `fixtures-unmatched`, makes sure a file no formatter handles
+  still fails.
+- A weekly workflow opens an issue when an input pinned to a release tag
+  (import-tree, nixfmt-rs) has a newer release, and `just outdated` lists them.
+
+#### Changed
+
+- import-tree is updated from v0.2.0 to v0.3.0. `lib.importTree dir` now returns
+  the module function itself rather than `{ imports = [ … ]; }`; both work in
+  `imports`.
+
 ### 2026-11-12
 
 #### Added

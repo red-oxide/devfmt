@@ -1,0 +1,14 @@
+name: Check
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    uses: red-oxide/github-workflows/.github/workflows/check.yml@master

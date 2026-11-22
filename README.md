@@ -103,10 +103,20 @@ just            # list the recipes
 just fmt        # nix fmt
 just verify     # check formatting (on a copy), then nix flake check
 just update     # nix flake update
+just outdated   # inputs pinned to a release tag that have a newer release
 ```
+
+`nix flake check` also runs every formatter over
+[`tests/fixtures`](tests/fixtures), one already formatted sample per language,
+and fails if any of them changes; and it checks that a file no formatter handles
+still fails. CI runs it on every push to master and every pull request.
 
 Flake inputs are updated daily by a workflow. nixfmt-rs follows devfmt's nixpkgs
 and treefmt-nix, so flakes using devfmt don't lock a second copy of either.
+
+import-tree and nixfmt-rs are pinned to release tags, which `nix flake update`
+doesn't move. A weekly workflow opens an issue when either has a newer release;
+`just outdated` shows the same list locally.
 
 ## License
 
