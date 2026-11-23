@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+# SPDX-FileCopyrightText: 2026 Chris Palmer <chris@red-oxide.org>
+# SPDX-License-Identifier: MIT
+
 # List flake inputs pinned to a release tag (such as `v0.2.0` or `0.5.3`) that
 # have a newer release upstream. `nix flake update` never moves these, so they
 # have to be bumped by hand in flake.nix.

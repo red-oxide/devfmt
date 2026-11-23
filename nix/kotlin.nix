@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Chris Palmer <chris@red-oxide.org>
+# SPDX-License-Identifier: MIT
+
 _: {
   perSystem.treefmt = {
     # .kt and .kts, which includes Gradle's Kotlin DSL build scripts.

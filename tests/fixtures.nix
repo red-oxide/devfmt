@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Chris Palmer <chris@red-oxide.org>
+# SPDX-License-Identifier: MIT
+
 # Checks for devfmt itself, not part of the module other flakes import.
 _: {
   perSystem =
