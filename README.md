@@ -1,3 +1,8 @@
+<!--
+SPDX-FileCopyrightText: 2026 Chris Palmer <chris@red-oxide.org>
+SPDX-License-Identifier: MIT
+-->
+
 # devfmt
 
 One formatting setup for all my repos: a [flake-parts](https://flake.parts)

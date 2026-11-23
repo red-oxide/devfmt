@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Chris Palmer <chris@red-oxide.org>
+# SPDX-License-Identifier: MIT
+
 {
   description = "One treefmt setup for all my repos";
   inputs = {
@@ -66,6 +69,7 @@
       imports = [
         sharedModule
         ./tests/fixtures.nix
+        ./tests/reuse.nix
       ];
 
       flake = {

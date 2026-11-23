@@ -1,0 +1,12 @@
+# SPDX-FileCopyrightText: 2026 Chris Palmer <chris@red-oxide.org>
+# SPDX-License-Identifier: MIT
+
+# Licensing for files that cannot carry a header. See https://reuse.software.
+# The fixtures under tests/ are formatter samples that must stay byte for byte
+# as the formatters leave them, and JSON has no comments.
+version = 1
+
+[[annotations]]
+SPDX-FileCopyrightText  = "2026 Chris Palmer <chris@red-oxide.org>"
+SPDX-License-Identifier = "MIT"
+path                    = ["flake.lock", "tests/fixtures/**"]

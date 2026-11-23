@@ -1,3 +1,8 @@
+<!--
+SPDX-FileCopyrightText: 2026 Chris Palmer <chris@red-oxide.org>
+SPDX-License-Identifier: MIT
+-->
+
 # Changelog
 
 All notable changes to devfmt are recorded here. The format is based on
@@ -7,6 +12,11 @@ Versions are CalVer, `YY.MINOR.PATCH`: the major number is the two-digit year.
 Routine flake input updates are left out.
 
 ## Unreleased
+
+### Added
+
+- The repo is [REUSE](https://reuse.software)-compliant: SPDX headers on every
+  file, license texts under `LICENSES/`, and a `reuse` flake check.
 
 ## [26.0.0] - 2026-11-22
 
