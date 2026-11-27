@@ -35,10 +35,26 @@
         ];
 
         perSystem =
-          { pkgs, ... }:
+          {
+            config,
+            lib,
+            pkgs,
+            ...
+          }:
           {
             treefmt.programs.nixfmt.package =
               devfmtInputs.nixfmt-rs.packages.${pkgs.stdenv.hostPlatform.system}.default;
+
+            # A minimal shell so `nix develop` and direnv's `use flake` work in
+            # every repo; a repo's own devShells.default replaces it.
+            devShells.default = lib.mkDefault (
+              pkgs.mkShellNoCC {
+                packages = [
+                  config.treefmt.build.wrapper
+                  pkgs.just
+                ];
+              }
+            );
           };
       };
 

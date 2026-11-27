@@ -58,6 +58,24 @@ Flakes using the module get `formatter.<system>` (for `nix fmt`) and
 `checks.<system>.treefmt` from treefmt-nix's defaults. Turn either off with
 `perSystem.treefmt.flakeFormatter = false` or `flakeCheck = false`.
 
+### Dev shell and direnv
+
+Flakes using the module also get a minimal `devShells.<system>.default` (the
+treefmt wrapper and `just`). Define your own `devShells.default` to replace it.
+
+Since every repo using devfmt has a dev shell, this `.envrc` works anywhere
+(with [nix-direnv](https://github.com/nix-community/nix-direnv) for caching):
+
+```sh
+# shellcheck shell=bash
+use flake
+watch_dir nix
+```
+
+`watch_dir nix` reloads the shell when a file loaded through `importTree ./nix`
+changes, not just `flake.nix` and `flake.lock`. treefmt runs shellcheck on
+`.envrc`, which needs the `shell=bash` directive.
+
 ## Formatters
 
 treefmt runs every formatter that matches a file, in priority order.
