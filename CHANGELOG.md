@@ -18,6 +18,7 @@ Routine flake input updates are left out.
 - A default `devShells.<system>.default` (the treefmt wrapper and `just`), so
   `nix develop` and direnv's `use flake` work in every repo. A repo's own
   `devShells.default` replaces it.
+
 - devfmt has its own `.envrc`.
 
 - The repo is [REUSE](https://reuse.software)-compliant: SPDX headers on every
