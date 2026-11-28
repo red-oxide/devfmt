@@ -21,12 +21,12 @@ Routine pin updates are left out.
   about it now that there's no such input; drop the line. Nothing else changes
   for them: the treefmt wrapper is the same derivation as before.
 
-- nixfmt-rs is built from its `nix/package.nix` with the calling flake's
-  `pkgs`, instead of through its flake. Same result as the old `follows`, but
-  without devfmt's nixpkgs.
+- nixfmt-rs is built from its `nix/package.nix` with the calling flake's `pkgs`,
+  instead of through its flake. Same result as the old `follows`, but without
+  devfmt's nixpkgs.
 
-- import-tree and nixfmt-rs follow their release tags through tack, so the
-  daily update moves them to a new release.
+- import-tree and nixfmt-rs follow their release tags through tack, so the daily
+  update moves them to a new release.
 
 ### Removed
 

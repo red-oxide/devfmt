@@ -162,11 +162,11 @@ just outdated   # tack look: how far each pin is behind, without updating
 and fails if any of them changes; and it checks that a file no formatter handles
 still fails. CI runs it on every push to master and every pull request.
 
-Inputs are pinned with tack in [`.tack/pins.toml`](.tack/pins.toml), and a
-daily workflow runs `tack update` and commits the lock. import-tree and
-nixfmt-rs follow their release tags (`tag = "v{version}"` and `"{version}"`), so
-the update moves them to a new release and nothing in between. The dev shell
-has `tack`; `tack add` adds a pin.
+Inputs are pinned with tack in [`.tack/pins.toml`](.tack/pins.toml), and a daily
+workflow runs `tack update` and commits the lock. import-tree and nixfmt-rs
+follow their release tags (`tag = "v{version}"` and `"{version}"`), so the
+update moves them to a new release and nothing in between. The dev shell has
+`tack`; `tack add` adds a pin.
 
 nixfmt-rs is a plain source pin, not a flake: devfmt builds its
 `nix/package.nix` with the calling flake's `pkgs`, so it brings no nixpkgs or
