@@ -18,9 +18,10 @@ Routine flake input updates are left out.
 - A default `devShells.<system>.default` (the treefmt wrapper and `just`), so
   `nix develop` and direnv's `use flake` work in every repo. A repo's own
   `devShells.default` replaces it.
+
 - tack's generated files (`.tack/default.nix`, `.tack/pins.lock.json`,
-  `.tack/.gitignore`) are excluded from formatting, so repos that pin with
-  tack pass the format check. `.tack/pins.toml` is still formatted.
+  `.tack/.gitignore`) are excluded from formatting, so repos that pin with tack
+  pass the format check. `.tack/pins.toml` is still formatted.
 
 - devfmt has its own `.envrc`.
 
