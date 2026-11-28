@@ -112,6 +112,9 @@ everywhere:
 - the Gradle wrapper and settings: `gradlew`, `gradlew.bat`,
   `gradle/wrapper/**`, `gradle.properties`
 - `*.patch`, `**/qmldir`, `secrets/**`
+- the files [tack](https://github.com/manic-systems/tack) writes itself:
+  `.tack/default.nix`, `.tack/pins.lock.json`, `.tack/.gitignore`
+  (`.tack/pins.toml` is still formatted)
 
 To exclude more in a project, add to the list (it merges with devfmt's):
 
