@@ -9,9 +9,30 @@ All notable changes to devfmt are recorded here. The format is based on
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 Versions are CalVer, `YY.MINOR.PATCH`: the major number is the two-digit year.
-Routine flake input updates are left out.
+Routine pin updates are left out.
 
 ## Unreleased
+
+### Changed
+
+- devfmt pins its inputs with [tack](https://github.com/manic-systems/tack)
+  (`.tack/pins.toml`) instead of flake inputs, and has no `flake.lock`. Flakes
+  using devfmt no longer need `devfmt.inputs.nixpkgs.follows`, and Nix warns
+  about it now that there's no such input; drop the line. Nothing else changes
+  for them: the treefmt wrapper is the same derivation as before.
+
+- nixfmt-rs is built from its `nix/package.nix` with the calling flake's `pkgs`,
+  instead of through its flake. Same result as the old `follows`, but without
+  devfmt's nixpkgs.
+
+- import-tree and nixfmt-rs follow their release tags through tack, so the daily
+  update moves them to a new release.
+
+### Removed
+
+- The weekly "Check pinned inputs" workflow and `scripts/pinned-inputs.sh`: the
+  daily `tack update` follows release tags itself. `just outdated` runs
+  `tack look`.
 
 ### Added
 

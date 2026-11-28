@@ -21,10 +21,7 @@ Add devfmt as an input and build the flake with `devfmt.lib.mkFlake`:
 {
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    devfmt = {
-      url = "github:red-oxide/devfmt";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    devfmt.url = "github:red-oxide/devfmt";
   };
 
   outputs =
@@ -37,6 +34,31 @@ Add devfmt as an input and build the flake with `devfmt.lib.mkFlake`:
 
 `github:red-oxide/devfmt` follows master. To pin a release, use its tag, such as
 `github:red-oxide/devfmt/v26.0.0`; see the [changelog](CHANGELOG.md).
+
+devfmt pins its own inputs with [tack](https://github.com/manic-systems/tack)
+rather than flake inputs, so there is nothing to `follows`, and nothing needs
+to: it formats with your flake's `pkgs`, nixfmt-rs included, so devfmt's own
+nixpkgs is never fetched.
+
+### With tack
+
+In a repo that pins with tack, pin devfmt like any other flake and pass it to
+`mkFlake` with the rest of your pins (see
+[rebar](https://github.com/red-oxide/rebar) for a full example):
+
+```toml
+[all_follow]
+nixpkgs = "nixpkgs"
+
+[inputs.nixpkgs]
+url = "gh:nixos/nixpkgs/nixos-unstable"
+
+[inputs.devfmt]
+url = "gh:red-oxide/devfmt"
+```
+
+devfmt's pins are recomposable, so `[all_follow]` or a pin's `follows` reaches
+into them like into a flake's inputs.
 
 Then:
 
@@ -131,8 +153,8 @@ Other treefmt-nix options work the same way, for example
 just            # list the recipes
 just fmt        # nix fmt
 just verify     # check formatting (on a copy), then nix flake check
-just update     # nix flake update
-just outdated   # inputs pinned to a release tag that have a newer release
+just update     # tack update: move the pins (all, or the ones named)
+just outdated   # tack look: how far each pin is behind, without updating
 ```
 
 `nix flake check` also runs every formatter over
@@ -140,12 +162,15 @@ just outdated   # inputs pinned to a release tag that have a newer release
 and fails if any of them changes; and it checks that a file no formatter handles
 still fails. CI runs it on every push to master and every pull request.
 
-Flake inputs are updated daily by a workflow. nixfmt-rs follows devfmt's nixpkgs
-and treefmt-nix, so flakes using devfmt don't lock a second copy of either.
+Inputs are pinned with tack in [`.tack/pins.toml`](.tack/pins.toml), and a daily
+workflow runs `tack update` and commits the lock. import-tree and nixfmt-rs
+follow their release tags (`tag = "v{version}"` and `"{version}"`), so the
+update moves them to a new release and nothing in between. The dev shell has
+`tack`; `tack add` adds a pin.
 
-import-tree and nixfmt-rs are pinned to release tags, which `nix flake update`
-doesn't move. A weekly workflow opens an issue when either has a newer release;
-`just outdated` shows the same list locally.
+nixfmt-rs is a plain source pin, not a flake: devfmt builds its
+`nix/package.nix` with the calling flake's `pkgs`, so it brings no nixpkgs or
+Rust toolchain of its own.
 
 ## License
 

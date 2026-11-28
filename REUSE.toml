@@ -3,10 +3,25 @@
 
 # Licensing for files that cannot carry a header. See https://reuse.software.
 # The fixtures under tests/ are formatter samples that must stay byte for byte
-# as the formatters leave them, and JSON has no comments.
+# as the formatters leave them, and JSON has no comments. .tack/default.nix is
+# tack's own resolver, written by tack and EUPL-1.2 like the rest of tack; it
+# carries its own SPDX line.
 version = 1
 
 [[annotations]]
 SPDX-FileCopyrightText  = "2026 Chris Palmer <chris@red-oxide.org>"
 SPDX-License-Identifier = "MIT"
-path                    = ["flake.lock", "tests/fixtures/**"]
+path                    = ["tests/fixtures/**"]
+
+# Written by tack.
+[[annotations]]
+SPDX-FileCopyrightText  = "2026 Chris Palmer <chris@red-oxide.org>"
+SPDX-License-Identifier = "MIT"
+path                    = [".tack/.gitignore", ".tack/pins.lock.json"]
+
+# Written by tack; edits would stop tack from updating it.
+[[annotations]]
+SPDX-FileCopyrightText  = "tack contributors <https://github.com/manic-systems/tack>"
+SPDX-License-Identifier = "EUPL-1.2"
+path                    = [".tack/default.nix"]
+precedence              = "aggregate"

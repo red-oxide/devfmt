@@ -8,6 +8,12 @@ on:
     branches: [master]
   pull_request:
   workflow_dispatch:
+  # The Update pins workflow pushes with GITHUB_TOKEN, which doesn't trigger
+  # `push`, so check its lock updates when it finishes.
+  workflow_run:
+    workflows: [Update pins]
+    types: [completed]
+    branches: [master]
 
 permissions:
   contents: read
