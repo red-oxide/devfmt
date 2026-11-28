@@ -3,30 +3,30 @@
 
 {
   description = "One treefmt setup for all my repos";
-  inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    systems.url = "github:nix-systems/default";
-    treefmt-nix = {
-      url = "github:numtide/treefmt-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    flake-parts = {
-      url = "github:hercules-ci/flake-parts";
-      inputs.nixpkgs-lib.follows = "nixpkgs";
-    };
-    import-tree.url = "github:denful/import-tree/v0.3.0";
-    nixfmt-rs = {
-      url = "github:Mic92/nixfmt-rs/0.5.3";
-      # Build nixfmt-rs with our nixpkgs instead of locking its own copy
-      # (and its own Rust toolchain) in every flake that uses devfmt.
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.treefmt-nix.follows = "treefmt-nix";
-    };
-  };
 
+  # No flake inputs: everything is pinned with tack in .tack/pins.toml
+  # (`tack update` to move pins, `tack add` to add one). Using devfmt doesn't
+  # need tack; the resolver in .tack/default.nix reads the lock.
+  #
+  # A tack project that pins devfmt can override its pins through
+  # `tackOverrides`. A flake can't `follows` them, but doesn't need to: devfmt
+  # formats with the calling flake's pkgs, nixfmt-rs included, so devfmt's own
+  # nixpkgs is only fetched for its own checks.
   outputs =
-    devfmtInputs:
+    { self, ... }@args:
     let
+      pins = (import ./.tack) { overrides = args.tackOverrides or { }; };
+      # Flake-style inputs, the way flake-parts expects them.
+      devfmtInputs =
+        removeAttrs pins [
+          "__functor"
+          "_meta"
+          "_patched"
+        ]
+        // {
+          inherit self;
+        };
+
       sharedModule = {
         imports = [
           devfmtInputs.treefmt-nix.flakeModule
@@ -42,8 +42,9 @@
             ...
           }:
           {
-            treefmt.programs.nixfmt.package =
-              devfmtInputs.nixfmt-rs.packages.${pkgs.stdenv.hostPlatform.system}.default;
+            # Built with the calling flake's pkgs from nixfmt-rs' own package
+            # definition (the pin is a plain source tree, not a flake).
+            treefmt.programs.nixfmt.package = pkgs.callPackage "${devfmtInputs.nixfmt-rs}/nix/package.nix" { };
 
             # A minimal shell so `nix develop` and direnv's `use flake` work in
             # every repo; a repo's own devShells.default replaces it.
@@ -79,11 +80,10 @@
           }
         );
     in
-    devfmtInputs.flake-parts.lib.mkFlake { inputs = devfmtInputs; } {
-      systems = import devfmtInputs.systems;
-
+    # devfmt's own outputs, built the way it builds everyone else's (which also
+    # sets pkgs: flake-parts can't find nixpkgs among a tack flake's inputs).
+    mkFlake { inputs = devfmtInputs; } {
       imports = [
-        sharedModule
         ./tests/fixtures.nix
         ./tests/reuse.nix
       ];
@@ -98,9 +98,23 @@
       };
 
       perSystem =
-        { config, ... }:
+        {
+          config,
+          pkgs,
+          system,
+          ...
+        }:
         {
           formatter = config.treefmt.build.wrapper;
+
+          # The default shell plus tack, for working on devfmt's pins.
+          devShells.default = pkgs.mkShellNoCC {
+            packages = [
+              config.treefmt.build.wrapper
+              pkgs.just
+              devfmtInputs.tack.packages.${system}.tack
+            ];
+          };
         };
     };
 }

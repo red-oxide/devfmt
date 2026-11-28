@@ -1,0 +1,78 @@
+{
+  "$declared": {
+    "nixpkgs": "gh:nixos/nixpkgs/nixos-unstable",
+    "systems": "gh:nix-systems/default",
+    "treefmt-nix": "gh:numtide/treefmt-nix",
+    "flake-parts": "gh:hercules-ci/flake-parts",
+    "import-tree": "gh:denful/import-tree",
+    "nixfmt-rs": "gh:Mic92/nixfmt-rs",
+    "tack": "gh:manic-systems/tack"
+  },
+  "nixpkgs": {
+    "type": "github",
+    "owner": "nixos",
+    "repo": "nixpkgs",
+    "rev": "2786a2a72088ecf32aea5b3ec52099e6a7cff78f",
+    "narHash": "sha256-f/VVvxf5RsQgWVhUtefoca5ktVg0DA2bnkMOcmSnozo=",
+    "lastModified": 1795234589,
+    "public": true
+  },
+  "systems": {
+    "type": "github",
+    "owner": "nix-systems",
+    "repo": "default",
+    "rev": "d36eeed142f88b5a636f2e3856a53c61654cf29b",
+    "narHash": "sha256-uuanbkFk8a313Zfrxdcz8Us/yQtaxNnKJtX8v0ZPpd8=",
+    "lastModified": 1791244623,
+    "public": true
+  },
+  "treefmt-nix": {
+    "type": "github",
+    "owner": "numtide",
+    "repo": "treefmt-nix",
+    "rev": "b7b56d3c8833016c650ca542b1230e6130299741",
+    "narHash": "sha256-/C0FK2Fwq0aWE/GADYyYbAIdQeGfYBbWMin3tfks1NA=",
+    "lastModified": 1795615686,
+    "public": true
+  },
+  "flake-parts": {
+    "type": "github",
+    "owner": "hercules-ci",
+    "repo": "flake-parts",
+    "rev": "ea2630b7470978622c7689a1ff75d2b389175399",
+    "narHash": "sha256-V1h85lUaJBQoHFrB2vpXZOE0Ju1MYSnIpsehoVZYlDo=",
+    "lastModified": 1793576659,
+    "public": true
+  },
+  "import-tree": {
+    "type": "github",
+    "owner": "denful",
+    "repo": "import-tree",
+    "rev": "eb1b52eaecc57f7c136d07ae8a93e724dfecac46",
+    "narHash": "sha256-ljEMTXP/rH0tOvDzc9gzwww6KcHRPRnEHzd9lK48V7s=",
+    "lastModified": 1788467110,
+    "public": true,
+    "tag": "v0.3.0",
+    "version": "0.3.0"
+  },
+  "nixfmt-rs": {
+    "type": "github",
+    "owner": "Mic92",
+    "repo": "nixfmt-rs",
+    "rev": "099806f6d9d0c07cf98a3733eb4819119dfe2b7b",
+    "narHash": "sha256-ELXgj/ij6m5aipXVb7vdzD/+77YHTyytVv900Bcp1yU=",
+    "lastModified": 1788183809,
+    "public": true,
+    "tag": "0.5.3",
+    "version": "0.5.3"
+  },
+  "tack": {
+    "type": "github",
+    "owner": "manic-systems",
+    "repo": "tack",
+    "rev": "673997981720feebb3870645932b6cfe6657db9f",
+    "narHash": "sha256-iRVnAKvQh5vC76QppovlxTklJf98EA+GYEY91loasy4=",
+    "lastModified": 1795748364,
+    "public": true
+  }
+}
