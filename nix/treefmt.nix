@@ -34,6 +34,11 @@ _: {
         "**/.gitkeep"
         "**/qmldir"
         "secrets/**"
+        # tack (https://github.com/manic-systems/tack) writes these itself:
+        # its resolver, its lock, and an ignore list for patched trees.
+        ".tack/default.nix"
+        ".tack/pins.lock.json"
+        ".tack/.gitignore"
       ];
     };
   };
